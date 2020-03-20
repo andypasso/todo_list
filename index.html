@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My ToDo Lists</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+
+</head>
+<body>
+    <h1 class="title">Things to do</h1>
+
+    <div class="all-tasks">
+
+        <h2 class="task-list-title">My lists</h2>
+        <ul class="task-list">
+            <li  class='list-name 
+            active-list'>Todo code</li>
+            <li class='list-name'>Work</li>
+            <li class='list-name'>Groceries</li>
+        </ul>
+
+        <form action="">
+            <input 
+            type="text" 
+            class="new list"
+            placeholder="new list name"
+            aria-label="new list name" 
+            >
+            <button class="btn create"
+            aria-label="create new list">+</button>
+        </form>
+
+    </div>
+
+    <div class="todo-list">
+        <div class="todo-header">
+            <h2 class="list-title">Todo Code</h2>
+            <p class="task-count"> 3 task remaining</p>
+        </div>
+
+
+        <div class="todo-body">
+
+            <div class="tasks">
+
+                <!-- task 1 -->
+                <div class="task">
+                    <input 
+                    type="checkbox" 
+                    id="task-1">
+                    <label for="task-1">
+                        <span class="custom-check-box"></span>
+                        this is a task
+                    </label>
+                </div>
+
+                <!-- task 2 -->
+
+                <div class="task">
+                    <input 
+                    type="checkbox" 
+                    id="task-2">
+                    <label for="task-2">
+                        <span class="custom-check-box"></span>
+                        this is another task
+                    </label>
+                </div>
+
+                <!-- task 3 -->
+                <div class="task">
+                    <input 
+                    type="checkbox" 
+                    id="task-3">
+                    <label for="task-3">
+                        <span class="custom-check-box"></span>
+                        this is a third task
+                    </label>
+                </div>
+
+
+            </div>
+
+            <div class="new-task-creator">
+
+                <form action="">
+                    <input 
+                    type="text" 
+                    class="new task"
+                    placeholder="new task name"
+                    aria-label="new task name" 
+                    >
+                    <button class="btn create"
+                    aria-label="create new task">+</button>
+                </form>
+
+            </div>
+            
+            <div class="delete-stuff">
+                <button class="btn delete"> Clear completed task</button>
+                <button class="btn delete">Delete list</button>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+</html>
