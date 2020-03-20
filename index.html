@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My ToDo Lists</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-
+    <script defer src="main.js"></script>
 
 </head>
 <body>
@@ -14,17 +14,18 @@
     <div class="all-tasks">
 
         <h2 class="task-list-title">My lists</h2>
-        <ul class="task-list">
-            <li  class='list-name 
+        <ul class="task-list" data-lists="">
+            <!-- <li  class='list-name 
             active-list'>Todo code</li>
             <li class='list-name'>Work</li>
-            <li class='list-name'>Groceries</li>
+            <li class='list-name'>Groceries</li> -->
         </ul>
 
-        <form action="">
+        <form action="" data-new-list-form >
             <input 
             type="text" 
             class="new list"
+            data-new-list-input
             placeholder="new list name"
             aria-label="new list name" 
             >
@@ -34,16 +35,16 @@
 
     </div>
 
-    <div class="todo-list">
+    <div class="todo-list" data-list-display-container>
         <div class="todo-header">
-            <h2 class="list-title">Todo Code</h2>
-            <p class="task-count"> 3 task remaining</p>
+            <h2 class="list-title" data-list-title >Todo Code</h2>
+            <p class="task-count" data-list-count > 3 task remaining</p>
         </div>
 
 
         <div class="todo-body">
 
-            <div class="tasks">
+            <div class="tasks" data-tasks>
 
                 <!-- task 1 -->
                 <div class="task">
@@ -82,12 +83,13 @@
 
             </div>
 
-            <div class="new-task-creator">
+            <div class="new-task-creator" data-new-task-form >
 
                 <form action="">
                     <input 
                     type="text" 
                     class="new task"
+                    data-new-task-input
                     placeholder="new task name"
                     aria-label="new task name" 
                     >
@@ -99,7 +101,7 @@
             
             <div class="delete-stuff">
                 <button class="btn delete"> Clear completed task</button>
-                <button class="btn delete">Delete list</button>
+                <button class="btn delete" data-delete-list--button>Delete list</button>
             </div>
 
 
@@ -108,6 +110,15 @@
 
     </div>
 
+    <template id='task-template'>
+        <div class="task">
+            <input 
+            type="checkbox">
+            <label for="task-1">
+                <span class="custom-check-box"></span>
+            </label>
+        </div>
+    </template>
 
 </body>
 </html>
