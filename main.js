@@ -8,7 +8,8 @@ const listCountElement = document.querySelector('[data-list-count]');
 const tasksContainer = document.querySelector('[data-tasks]');
 const taskTemplate = document.getElementById('task-template');
 const newTaskForm = document.querySelector('[data-new-task-form');
-const newTaskInput = document.querySelector('[data-new-task-input]')
+const newTaskInput = document.querySelector('[data-new-task-input]');
+const clearCompleteTasksButton = document.querySelector('[data-clear-complete-task-buttton]');
 
 
 
@@ -39,6 +40,13 @@ deleteListButton.addEventListener('click', event =>{
     selectedListId = null;
     saveAndRender();
 })
+
+clearCompleteTasksButton.addEventListener('click', () => {
+    const selectedList = lists.find(list => list.id === selectedListId)
+    selectedList.tasks = selectedList.tasks.filter(task => !task.complete)
+    saveAndRender()
+  })
+
 
 newListForm.addEventListener('submit', event => {
 event.preventDefault();
