@@ -16,6 +16,6 @@
       "arrow-parens": "off",
       "no-use-before-define": "off",
       "no-unused-vars":"off",
-      "import/extensions": "off"
+      "import/no-unresolved": "off"
     }
   }
