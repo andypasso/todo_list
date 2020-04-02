@@ -13,10 +13,26 @@ const newTaskForm = document.querySelector('[data-new-task-form]');
 const newTaskInput = document.querySelector('[data-new-task-input]');
 const clearCompleteTasksButton = document.querySelector('[data-clear-complete-tasks-button]');
 
+const priority = document.getElementById('priority');
+const date = document.getElementById('date');
+const description = document.getElementById('description');
+const btnTask = document.getElementById('addTask');
+const updateTask = document.getElementById('updateTask');
+
+
 const LOCAL_STORAGE_LIST_KEY = 'task.lists';
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListId';
-let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [{ id: '1585349101949', name: 'Default', tasks: [{ id: 1585349106814, name: 'This is a ', complete: false }, { id: '1585349111835', name: 'Default List', complete: false }] }];
+let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [];
 let selectedListId = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY);
+
+// getting a task
+
+const getTask = (task) => {
+  document.getElementById('newTaskName').value = task.name;
+  document.getElementById('description').value = task.description;
+  document.getElementById('date').value = task.date;
+  document.getElementById('priority').value = task.priority;
+};
 
 // Event listeneres // DOM manipulation
 
@@ -26,6 +42,7 @@ listsContainer.addEventListener('click', e => {
     saveAndRender();
   }
 });
+
 
 tasksContainer.addEventListener('click', e => {
   if (e.target.tagName.toLowerCase() === 'input') {
@@ -59,13 +76,22 @@ newListForm.addEventListener('submit', e => {
   saveAndRender();
 });
 
-newTaskForm.addEventListener('submit', e => {
+btnTask.addEventListener('click', (e) => {
   e.preventDefault();
   const taskName = newTaskInput.value;
-  if (taskName == null || taskName === '') return;
-  const task = createTask(taskName);
+  const desc = description.value;
+  const prior = priority.value;
+  const day = date.value;
+  if (
+    taskName === null
+    || (taskName === '' && desc === null)
+    || (desc === '' && prior === null)
+    || (prior === '' && day === null)
+    || day === ''
+  ) return;
+  const task = createTask(taskName, desc, prior, day);
   newTaskInput.value = null;
-  const selectedList = lists.find(list => list.id === selectedListId);
+  const selectedList = lists.find((list) => list.id === selectedListId);
   selectedList.tasks.push(task);
   saveAndRender();
 });
@@ -74,7 +100,14 @@ newTaskForm.addEventListener('submit', e => {
 
 const createList = (name) => ({ id: Date.now().toString(), name, tasks: [] });
 
-const createTask = (name) => ({ id: Date.now().toString(), name, complete: false });
+const createTask = (name, description, priority, date) => ({
+  id: Date.now().toString(),
+  name,
+  description,
+  priority,
+  date,
+  complete: false,
+});
 
 // data storage and renders
 
@@ -90,9 +123,9 @@ const save = () => {
 
 const render = () => {
   clearElement(listsContainer);
-  renderLists();
+  renderLists(lists, selectedListId);
 
-  const selectedList = lists.find(list => list.id === selectedListId);
+  const selectedList = lists.find((list) => list.id === selectedListId);
   if (selectedListId == null) {
     listDisplayContainer.style.display = 'none';
   } else {
@@ -105,14 +138,24 @@ const render = () => {
 };
 
 const renderTasks = (selectedList) => {
-  selectedList.tasks.forEach(task => {
+  const taskTemplate = document.getElementById('task-template');
+  const tasksContainer = document.querySelector('[data-tasks]');
+  selectedList.tasks.forEach((task) => {
     const taskElement = document.importNode(taskTemplate.content, true);
     const checkbox = taskElement.querySelector('input');
     checkbox.id = task.id;
     checkbox.checked = task.complete;
-    const label = taskElement.querySelector('label');
+    const label = taskElement.querySelector('[data-label]');
+    const labelName = taskElement.querySelector('[label-name]');
+    const labelDesc = taskElement.querySelector('[label-description]');
+    const labelDate = taskElement.querySelector('[label-date]');
+    const labelPrior = taskElement.querySelector('[label-priority]');
+
     label.htmlFor = task.id;
-    label.append(task.name);
+    labelName.append(task.name);
+    labelDesc.append(task.description);
+    labelPrior.append(task.priority);
+    labelDate.append(task.date);
     tasksContainer.appendChild(taskElement);
   });
 };
@@ -144,4 +187,30 @@ const clearElement = (element) => {
   }
 };
 
+// adding a default list
+
+
+const defaultList = () => {
+  const list = createList('Create a To-Do List');
+  if (lists.length === 0) {
+    lists.push(list);
+    const taskName = 'Task';
+    const desc = 'Description';
+    const prior = 'Priority';
+    const day = 'Date';
+    if (
+      taskName === null
+    || (taskName === '' && desc === null)
+    || (desc === '' && prior === null)
+    || (prior === '' && day === null)
+    || day === ''
+    ) return;
+    const task = createTask(taskName, desc, prior, day);
+    lists[0].tasks.push(task);
+    renderLists(lists, selectedListId);
+    saveAndRender();
+  }
+};
+
+defaultList();
 render();
