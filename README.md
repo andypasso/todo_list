@@ -11,7 +11,7 @@ The Module Pattern
 And finally, after the introduction of a new lesson about OOP. The lesson shows the concepts of Single Responsibility and Tightly Coupled Objects.
 
 ## Live version
- Live(https://rawcdn.githack.com/andynarf/todo_list/6bd0153118d565b2f15adfe701be401d4f451ad8/dist/index.html)
+ [Live](https://rawcdn.githack.com/andynarf/todo_list/6bd0153118d565b2f15adfe701be401d4f451ad8/dist/index.html)
 
 ## Screenshot
 ![](https://user-images.githubusercontent.com/40712459/78399573-09c7a800-75ed-11ea-994d-b89b5f085846.png)
