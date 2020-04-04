@@ -10,6 +10,10 @@ Factory Functions
 The Module Pattern
 And finally, after the introduction of a new lesson about OOP. The lesson shows the concepts of Single Responsibility and Tightly Coupled Objects.
 
+##Screenshot
+![](https://user-images.githubusercontent.com/40712459/78399573-09c7a800-75ed-11ea-994d-b89b5f085846.png)
+
+
 ## Built With
 
 - HTML
